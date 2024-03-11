@@ -1,0 +1,33 @@
+<?php
+include '../db_connection.php';
+
+$sql = "SELECT * FROM game";
+$result = $conn->query($sql);
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Games</title>
+</head>
+<body>
+    <h1>Games</h1>
+    <ul>
+        <?php
+        if ($result->num_rows > 0) {
+            while($row = $result->fetch_assoc()) {
+                echo "<li><a href='show.php?id=".$row["id"]."'>".$row["title"]."</a></li>";
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
+    </ul>
+</body>
+</html>
+
+<?php
+$conn->close();
+?>
